@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Letter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="edit-container">
+    <h2>Edit Letter</h2>
+    <form method="POST">
+        <input type="text" name="recipient" value="{{ letter.recipient }}" required>
+        <textarea name="message" required>{{ letter.message }}</textarea>
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>

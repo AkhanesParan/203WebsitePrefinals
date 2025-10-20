@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+:root {
+    --left-bg: #b9c4b1;
+    --right-bg: #9cae96;
+    --white: #ffffff;
+    --gray: #dcdcdc;
+    --dark: #2e2e2e;
+    --mint: #9cae96;
+    --green: #4f604e;
+    --accent: #ff6b6b;
+}
+
+body {
+    margin: 0;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--green);
+    background: linear-gradient(to right, var(--left-bg) 65%, var(--right-bg) 35%);
+    background-attachment: fixed;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding-top: 40px;
+    background-color: rgb(221, 226, 218);
+    padding-bottom: 10px;
+}
+
+header h1 {
+    font-size: 3rem;
+    letter-spacing: 12px;
+    color: var(--green);
+    margin: 0;
+}
+
+.subtext {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-top: 5px;
+}
+
+.line {
+    width: 100px;
+    height: 1px;
+    background-color: var(--green);
+    margin: 10px auto;
+}
+
+/* Layout */
+.main-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    flex: 3;
+}
+
+/* Search bar */
+.search-bar {
+    margin: 0 auto 20px auto;
+    max-width: 750px;
+}
+
+.search-bar input {
+    width: 80%;
+    padding: 15px;
+    border: none;
+    background: var(--gray);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--green);
+    outline: none;
+}
+
+/* Letters */
+.letters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.letter-card {
+    background: var(--white);
+    padding: 15px;
+    min-height: 100px;
+    box-shadow: 5px 5px 0 var(--gray);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.letter-card:hover {
+    transform: translateY(-4px);
+}
+
+.letter-title {
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 0 5px 0;
+    color: var(--green);
+}
+
+.letter-date {
+    font-size: 0.8rem;
+    color: var(--green);
+    margin-bottom: 10px;
+}
+
+.letter-message {
+    font-size: 0.9rem;
+    color: var(--dark);
+    word-wrap: break-word;
+}
+
+/* Heart Section */
+.heart-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.heart-button {
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.heart-button:hover {
+    transform: scale(1.2);
+    color: var(--accent);
+}
+
+.heart-count {
+    font-size: 0.9rem;
+    color: var(--dark);
+}
+
+/* RIGHT PANEL */
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Nav */
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 5px;
+}
+
+.side-nav a {
+    color: var(--green);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+.side-nav a:hover {
+    text-decoration: underline;
+}
+
+/* Form box */
+.form-box {
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 5px 5px 0 var(--gray);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.form-box label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    color: var(--green);
+}
+
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid var(--green);
+    margin-bottom: 15px;
+    font-family: 'Libre Baskerville', serif;
+    outline: none;
+    color: var(--green);
+    background: transparent;
+    letter-spacing: 2px;
+}
+
+.form-box textarea {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    color: var(--dark);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.submit-btn {
+    background: var(--mint);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: var(--green);
+}
+
+/* Gradient overlay for header */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(101, 115, 99, 0));
+    z-index: 0;
+    pointer-events: none;
+}
