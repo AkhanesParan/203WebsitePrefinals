@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dear, You</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>DEAR, YOU_</h1>
+    <div class="line"></div>
+    <p class="subtext">digital love letters</p>
+    <div class="auth-buttons">
+        <form action="{{ url_for('logout') }}" method="GET">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="left-panel"> 
+        <a href="{{ url_for('logged') }}" class="back-btn">← Back</a>
+        <form method="GET" class="search-bar">
+                <input type="text" name="search" placeholder="SEARCH FOR NAME" value="{{ search }}">
+        </form>
+
+        <div class="letters-grid">
+            {% for letter in letters %}
+                
+                    <div class="letter-card">
+                <a href="{{ url_for('display_letter_archive', letter_id=letter.id) }}" class="letter-card-link">
+                        <p class="letter-title">DEAR, {{ letter.recipient|upper }}</p>
+                        <p class="letter-date">{{ letter.created.strftime('%b.%d,%Y')|upper }}</p>
+                        <p class="letter-message">{{ letter.message }}</p>
+                </a>        
+                        <form action="/reactarchive/{{ letter.id }}" method="POST"> 
+                        {% if letter.id in user_reactions %}
+                        <button type="button" disabled>❤️</button>
+                        {% else %} <button type="submit">❤️</button>
+                        {% endif %}
+                        <span class="heart-count">{{ letter.hearts }}</span>
+                    </form>
+                    </div>                
+            {% endfor %}
+        </div>
+    </div>        
+</div>
+
+</body>
+</html>

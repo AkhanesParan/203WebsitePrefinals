@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dear, You</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>DEAR, YOU_</h1>
+    <div class="line"></div>
+    <p class="subtext">digital love letters</p>
+    <div class="auth-buttons">
+        <button onclick="openModal('login')">Login</button>
+        <button onclick="openModal('signup')">Sign Up</button>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="left-panel">
+
+        <div class="letter-full">
+            <a href="{{ url_for('index') }}" class="back-btn">← Back</a>
+            <h2>DEAR, {{ letter.recipient|upper }}</h2>
+            <p class="letter-date">{{ letter.created.strftime('%b.%d,%Y')|upper }}</p>
+            <p class="letter-message-full">{{ letter.message }}</p>
+            <p>❤️ {{ letter.hearts }}</p>
+        </div>       
+    </div>
+
+    <div class="right-panel">
+         <nav class="side-nav">
+            <a href="{{ url_for('archive_out') }}">>ARCHIVE</a>
+            <a href="{{ url_for('about_out') }}">>ABOUT</a>
+        </nav>
+
+    </div>
+</div>
+
+<style>
+.letter-full {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 25px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    h2{
+        word-wrap: break-word; /* Break long words */
+        overflow-wrap: break-word; /* Modern alternative */
+        overflow: hidden;
+    }    
+}
+.letter-message-full {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #3e3a39;
+    margin-top: 20px;
+    white-space: pre-wrap; /* Preserve line breaks */
+    word-wrap: break-word; /* Break long words */
+    overflow-wrap: break-word; /* Modern alternative */
+    overflow: hidden;
+    overflow-y: auto;
+}
+</style>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

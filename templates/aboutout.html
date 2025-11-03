@@ -2,8 +2,58 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Dear, You</title>
+<title>About | Dear, You</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+/* --- About Page Specific Styles --- */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 30px;
+    gap: 20px;
+}
+
+.about-box {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 30px;
+    max-width: 700px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.about-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--accent-dark);
+    margin-bottom: 20px;
+}
+
+.about-box p {
+    font-size: 1rem;
+    color: var(--text-main);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.back-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    background: var(--accent-dark);
+    transform: scale(1.05);
+}
+</style>
 </head>
 <body>
 <header>
@@ -17,41 +67,36 @@
 </header>
 
 <div class="main-container">
-    <div class="left-panel">
-        <form method="GET" class="search-bar">
-            <input type="text" name="search" placeholder="SEARCH FOR NAME" value="{{ search }}">
-        </form>
-
-        <div class="letters-grid">
-            {% for letter in letters %}
-            
-                <div class="letter-card">
-            <a href="{{ url_for('display_letter_out', letter_id=letter.id) }}" class="letter-card-link">
-                    <p class="letter-title">DEAR, {{ letter.recipient|upper }}</p>
-                    <p class="letter-date">{{ letter.created.strftime('%b.%d,%Y')|upper }}</p>
-                    <p class="letter-message">{{ letter.message }}</p>
-            </a>        
-                    <form action="/react/{{ letter.id }}" method="POST">
-                        <button type="button" onclick="openModal('login')">❤️</button>
-                        <span class="heart-count">{{ letter.hearts }}</span>
-                    </form>
-                </div>
-            
-            {% endfor %}
-        </div>
+    <!-- Back Button -->
+    <div style="width: 100%; max-width: 700px; text-align: left;">
+        <a href="{{ url_for('index') }}" class="back-btn">← Back</a>
     </div>
 
-    <div class="right-panel">
-         <nav class="side-nav">
-            <a href="{{ url_for('archive_out') }}">>ARCHIVE</a>
-            <a href="{{ url_for('about_out') }}">>ABOUT</a>
-        </nav>
+    <!-- About Content -->
+    <div class="about-box">
+        <h2>About Us</h2>
+        <p>
+            Dear, You is a digital platform dedicated to the art of heartfelt correspondence. 
+            We provide a safe, elegant space for individuals to write, share, and engage with personal letters. 
+            Our platform encourages thoughtful reflection, creative expression, and meaningful connections. 
+            In a world dominated by quick messages and fleeting conversations, Dear, You seeks to restore the value of deliberate, intentional communication.
+        </p>
 
-        <div class="form-box locked">
-            <p>You must <a href="#" onclick="openModal('login')">log in</a> or
-            <a href="#" onclick="openModal('signup')">sign up</a> to write a letter.</p>
-        </div>
+        <h2>Our Mission</h2>
+        <p>
+            Our mission is to cultivate a community where words carry depth and emotion. 
+            We aim to empower our users to express themselves authentically, share their stories, and connect with others on a profound level. 
+            By offering a platform that celebrates sincerity and vulnerability, we hope to inspire empathy, kindness, and understanding among individuals from diverse backgrounds.
+        </p>
+
+        <h2>Our Vision</h2>
+        <p>
+            We envision a world where digital communication can be both meaningful and memorable. 
+            By nurturing the timeless practice of letter writing in the digital age, we aspire to create a space where personal reflection and genuine human connection are valued above brevity and speed. 
+            Our goal is to foster lasting relationships, encourage thoughtful expression, and remind people of the enduring power of words to heal, inspire, and unite.
+        </p>
     </div>
+
 </div>
 
 <!-- AUTH MODAL -->
@@ -128,8 +173,5 @@ window.addEventListener('click', function(e) {
 openModal("{{ form_mode }}");
 {% endif %}
 </script>
-
 </body>
 </html>
-
-

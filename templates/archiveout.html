@@ -17,16 +17,19 @@
 </header>
 
 <div class="main-container">
-    <div class="left-panel">
-        <form method="GET" class="search-bar">
-            <input type="text" name="search" placeholder="SEARCH FOR NAME" value="{{ search }}">
-        </form>
+    <div class="left-panel">  
+            <a href="{{ url_for('index') }}" class="back-btn">← Back</a>
+
+            <form method="GET" class="search-bar">
+                <input type="text" name="search" placeholder="SEARCH FOR NAME" value="{{ search }}">
+            </form> 
+           
 
         <div class="letters-grid">
             {% for letter in letters %}
             
                 <div class="letter-card">
-            <a href="{{ url_for('display_letter_out', letter_id=letter.id) }}" class="letter-card-link">
+            <a href="{{ url_for('display_letter_out_archive', letter_id=letter.id) }}" class="letter-card-link">
                     <p class="letter-title">DEAR, {{ letter.recipient|upper }}</p>
                     <p class="letter-date">{{ letter.created.strftime('%b.%d,%Y')|upper }}</p>
                     <p class="letter-message">{{ letter.message }}</p>
@@ -39,19 +42,7 @@
             
             {% endfor %}
         </div>
-    </div>
-
-    <div class="right-panel">
-         <nav class="side-nav">
-            <a href="{{ url_for('archive_out') }}">>ARCHIVE</a>
-            <a href="{{ url_for('about_out') }}">>ABOUT</a>
-        </nav>
-
-        <div class="form-box locked">
-            <p>You must <a href="#" onclick="openModal('login')">log in</a> or
-            <a href="#" onclick="openModal('signup')">sign up</a> to write a letter.</p>
-        </div>
-    </div>
+    </div>    
 </div>
 
 <!-- AUTH MODAL -->
@@ -128,8 +119,14 @@ window.addEventListener('click', function(e) {
 openModal("{{ form_mode }}");
 {% endif %}
 </script>
-
 </body>
 </html>
+
+
+
+
+
+
+
 
 

@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dear, You</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<title>Dear, You</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>DEAR, YOU_</h1>
-        <div class="line"></div>
-        <p class="subtext">digital love letters</p>
-        <div class="auth-buttons">
-            <button onclick="openModal('profile')">Profile</button>
-            <form action="{{ url_for('logout') }}" method="GET" style="display:inline;">
-                <button type="submit" class="logout-btn">Log out</button>
-            </form>
-        </div>
-    </header>
+<header>
+    <h1>DEAR, YOU_</h1>
+    <div class="line"></div>
+    <p class="subtext">digital love letters</p>
+    <div class="auth-buttons">
+        <form action="{{ url_for('logout') }}" method="GET">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</header>
 
-    <div class="main-container">
-        <!-- LEFT PANEL -->
-        <div class="left-panel">
-            <form method="GET" class="search-bar">
-                <input type="text" name="search" placeholder="SEARCH FOR NAME" value="{{ search }}">
-            </form>
+<div class="main-container">
+    <div class="left-panel">
+        <form method="GET" class="search-bar">
+            <input type="text" name="search" placeholder="SEARCH FOR NAME" value="{{ search }}">
+        </form>
 
-            <div class="letters-grid">
-                {% for letter in letters %}
+       <div class="letters-grid">
+            {% for letter in letters %}
+            
                 <div class="letter-card">
+            <a href="{{ url_for('display_letter', letter_id=letter.id) }}" class="letter-card-link">
                     <p class="letter-title">DEAR, {{ letter.recipient|upper }}</p>
                     <p class="letter-date">{{ letter.created.strftime('%b.%d,%Y')|upper }}</p>
                     <p class="letter-message">{{ letter.message }}</p>
-
-                    <form action="/react/{{ letter.id }}" method="POST" class="heart-form">
-                        <button type="submit" class="heart-button">❤️</button>
+            </a>        
+                    <form action="/react/{{ letter.id }}" method="POST"> 
+                        {% if letter.id in user_reactions %}
+                        <button type="button" disabled>❤️</button>
+                        {% else %} <button type="submit">❤️</button>
+                        {% endif %}
                         <span class="heart-count">{{ letter.hearts }}</span>
                     </form>
                 </div>
-                {% endfor %}
-            </div>
+            
+            {% endfor %}
         </div>
 
-        <!-- RIGHT PANEL -->
-        <div class="right-panel">
-            <nav class="side-nav">
-                <a href="#">>ARCHIVE</a>
-                <a href="#">>ABOUT</a>
-                <a href="#">>TERMS</a>
-            </nav>
-
-            <form method="POST" class="form-box">
-                <label for="recipient">DEAR, ____________</label>
-                <input type="text" id="recipient" name="recipient" required>
-                <textarea name="message" placeholder="SEND A MESSAGE..." required></textarea>
-                <button type="submit" class="submit-btn">SUBMIT</button>
-            </form>
-        </div>
     </div>
 
+    <div class="right-panel">
+        <nav class="side-nav">
+            <a href="{{ url_for('archive') }}">>ARCHIVE</a>
+            <a href="{{ url_for('about') }}">>ABOUT</a>
+            <a href="{{ url_for('profile') }}">>PROFILE</a>
+        </nav>
 
-
-
+        <form method="POST" class="form-box">
+            <label for="recipient">DEAR, ____________</label>
+            <input type="text" id="recipient" name="recipient" required>
+            <textarea name="message" placeholder="SEND A MESSAGE..." required></textarea>
+            <button class="submit-btn" type="submit">SUBMIT</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edit Letter | Dear, You</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+/* --- Edit Form Specific Styles --- */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px 30px;
+}
+
+.form-box {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+.form-box label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.form-box input,
+.form-box textarea {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+    outline: none;
+    padding: 10px 0;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    font-family: 'Nunito Sans', sans-serif;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-box textarea {
+    resize: none;
+    height: 160px;
+    line-height: 1.6;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.submit-btn {
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 12px 0;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background: var(--border);
+    color: var(--text-main);
+    text-decoration: none;
+    padding: 12px 0;
+    border-radius: 50px;
+    font-weight: 700;
+    text-align: center;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+}
+
+.back-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    background: var(--accent-dark);
+    transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>DEAR, YOU_</h1>
+    <div class="line"></div>
+    <p class="subtext">digital love letters</p>
+    <div class="auth-buttons">
+        <form action="{{ url_for('logout') }}" method="GET">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</header>
+
+<div class="main-container">
+    <!-- Back Button -->
+    <div style="width: 100%; max-width: 400px;">
+        <a href="{{ url_for('profile') }}" class="back-btn">← Back</a>
+    </div>
+
+    <!-- Edit Form -->
+    <form method="POST" action="{{ url_for('edit_letter', letter_id=letter.id) }}" class="form-box">
+        <label for="recipient">DEAR, ____________</label>
+        <input type="text" id="recipient" name="recipient" value="{{ letter.recipient }}" required>
+        <textarea name="message" placeholder="EDIT YOUR MESSAGE..." required>{{ letter.message }}</textarea>
+
+        <div class="button-group">
+            <a href="{{ url_for('profile') }}" class="cancel-btn">CANCEL</a>
+            <button type="submit" class="submit-btn">SAVE</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
